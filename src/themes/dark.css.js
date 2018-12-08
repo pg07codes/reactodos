@@ -2,10 +2,10 @@
 
 export default {
     AppBar:{
-        backgroundColor: '#181818'
+        backgroundColor: '#292929'
     },
     BottomNavigation:{
-        backgroundColor: '#181818',
+        backgroundColor: '#292929',
         position:'fixed',
         width:'100%',
         bottom:0,
@@ -18,14 +18,18 @@ export default {
     },
     Fab:{
         position:'fixed',
-        bottom:'5vw',
-        right:'5vw'
+        bottom:'80px',
+        right:'3vw',
+        zIndex:9999
 
     },
     TextField:{
         margin:'4px',
         padding:'4px'
-    }
+    },
+    Card:{
+        margin:'10px'
+    },
 
 
 }

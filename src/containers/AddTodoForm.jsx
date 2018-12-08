@@ -14,7 +14,18 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 export default class FormDialog extends React.Component {
     state = {
         open: false,
+        title:'',
+        todo:'',
+        urgent:false,
+
     };
+
+    onChangeHandler=(e)=>{
+        this.setState({
+            [e.target.id]:e.target.value
+        })
+
+    }
 
     handleClickOpen = () => {
         this.setState({ open: true });
@@ -23,6 +34,11 @@ export default class FormDialog extends React.Component {
     handleClose = () => {
         this.setState({ open: false });
     };
+
+    addTodo=()=>{
+        this.setState({ open: false });
+        localStorage[Math.random()*10000]=JSON.stringify(this.state)
+    }
 
     render() {
         return (
@@ -47,6 +63,7 @@ export default class FormDialog extends React.Component {
                             id="title"
                             label="Title"
                             type="text"
+                            onChange={this.onChangeHandler}
                         />
                         <TextField
                             style={styles.TextField}
@@ -55,10 +72,12 @@ export default class FormDialog extends React.Component {
                             placeholder='i have to...'
                             type="text"
                             fullWidth
+                            onChange={this.onChangeHandler}
+
                         />
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.handleClose} color="primary">
+                        <Button onClick={this.addTodo} color="primary">
                             Add
                         </Button>
                     </DialogActions>
