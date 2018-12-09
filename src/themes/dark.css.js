@@ -28,7 +28,8 @@ export default {
         padding:'4px'
     },
     Card:{
-        margin:'10px'
+        margin:'10px',
+
     },
 
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Fragment} from 'react'
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
@@ -7,10 +7,23 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import styles from '../themes/dark.css'
 
+let redAlert={
+    backgroundColor:'red'
+}
+let greenAlert={
+    backgroundColor:'green'
+}
+
+
 export default props => {
 
+    let alert={...styles.Card,
+        ...(props.todo.urgent?redAlert:null),
+        ...(props.todo.done?greenAlert:null)
+    }
+
     return (
-        <Card style={styles.Card}>
+        <Card style={alert} raised>
             <CardActionArea>
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
@@ -25,12 +38,32 @@ export default props => {
                 <Button size="small" color="primary">
                     DELETE
                 </Button>
-                <Button size="small" color="primary">
-                    MARK URGENT
-                </Button>
-                <Button size="small" color="primary">
-                    DONE
-                </Button>
+
+                {props.todo.done?
+                    <Button size="small" onClick={()=>props.markDone(props.todo.id)} color="primary">
+                        UNDO
+                    </Button> :
+                    <Fragment>
+                        <Button size="small" onClick={()=>props.markDone(props.todo.id)} color="primary">
+                            DONE
+                        </Button>
+
+                        {props.todo.urgent&&!props.todo.done?
+                            <Button size="small" onClick={()=>props.markUrgent(props.todo.id)} color="primary">
+                                DELAY
+                            </Button>:
+                            <Button size="small" onClick={()=>props.markUrgent(props.todo.id)} color="primary">
+                                MARK URGENT
+                            </Button>
+
+                        }
+                    </Fragment>
+
+                }
+
+
+
+
             </CardActions>
         </Card>
     )

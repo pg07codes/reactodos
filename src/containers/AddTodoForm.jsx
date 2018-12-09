@@ -12,11 +12,13 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 
 export default class FormDialog extends React.Component {
+
     state = {
         open: false,
         title:'',
         todo:'',
         urgent:false,
+        done:false
 
     };
 
@@ -37,15 +39,27 @@ export default class FormDialog extends React.Component {
 
     addTodo=()=>{
         if(this.state.title===''){
-// to do something for user feedback
+            // to do something for user feedback
         }else{
             this.handleClose()
-            this.props.addNewTodo(this.state)
-            let id=localStorage.length+1
-            let stringedState=JSON.stringify(this.state)
-            localStorage.setItem(id,stringedState)
+            this.setState((state,props)=>{
+                return({id:props.length})
+            },()=>{
+                this.props.addNewTodo(this.state)
+                this.setState({
+                    open: false,
+                    title:'',
+                    todo:'',
+                    urgent:false,
+                    done:false
+                })// to ensure that the state is reverted back to initial state after saving a todoItem.
+            })
 
-            console.log(localStorage)
+            // let id=localStorage.length+1
+            // let stringedState=JSON.stringify(this.state)
+            // localStorage.setItem(id,stringedState)
+            //
+            // console.log(localStorage)
 
         }
 

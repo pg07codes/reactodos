@@ -1,4 +1,4 @@
-import React, {Fragment, Component} from 'react'
+import React, {Component} from 'react'
 import Grid from '@material-ui/core/Grid';
 import TodoCards from '../components/TodoCards'
 //import _ from 'lodash'
@@ -9,14 +9,10 @@ class AllTodos extends Component {
     render() {
 
         let todoCards=this.props.allTodos.map(todo=>{
-            console.log(todo,'single todo')
-
             return(
-                <Fragment>
-                    <Grid item xs={11} md={4} s={8}>
-                        <TodoCards todo={todo}/>
-                    </Grid>
-                </Fragment>
+                <Grid key={todo.id} item xs={11} md={4} s={8}>
+                    <TodoCards markUrgent={this.props.markUrgent} markDone={this.props.markDone} todo={todo}/>
+                </Grid>
             )
         })
 
