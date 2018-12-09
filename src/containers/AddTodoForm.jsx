@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react'
+import React from 'react'
 import Fab from '@material-ui/core/Fab'
 import AddIcon from '@material-ui/icons/Add'
 import styles from '../themes/dark.css'
@@ -36,8 +36,19 @@ export default class FormDialog extends React.Component {
     };
 
     addTodo=()=>{
-        this.setState({ open: false });
-        localStorage[Math.random()*10000]=JSON.stringify(this.state)
+        if(this.state.title===''){
+// to do something for user feedback
+        }else{
+            this.handleClose()
+            this.props.addNewTodo(this.state)
+            let id=localStorage.length+1
+            let stringedState=JSON.stringify(this.state)
+            localStorage.setItem(id,stringedState)
+
+            console.log(localStorage)
+
+        }
+
     }
 
     render() {
@@ -62,12 +73,12 @@ export default class FormDialog extends React.Component {
                             margin="dense"
                             id="title"
                             label="Title"
+                            fullWidth
                             type="text"
                             onChange={this.onChangeHandler}
                         />
                         <TextField
                             style={styles.TextField}
-                            autoFocus
                             id="todo"
                             placeholder='i have to...'
                             type="text"

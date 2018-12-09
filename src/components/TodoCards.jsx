@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react'
+import React from 'react'
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
@@ -8,16 +8,16 @@ import Typography from '@material-ui/core/Typography';
 import styles from '../themes/dark.css'
 
 export default props => {
+
     return (
         <Card style={styles.Card}>
             <CardActionArea>
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
-                        Lizard
+                        {props.todo.title}
                     </Typography>
                     <Typography component="p">
-                        Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                        across all continents except Antarctica
+                        {props.todo.todo}
                     </Typography>
                 </CardContent>
             </CardActionArea>

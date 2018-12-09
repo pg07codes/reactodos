@@ -20,7 +20,7 @@ export default {
         position:'fixed',
         bottom:'80px',
         right:'3vw',
-        zIndex:9999
+        zIndex:2
 
     },
     TextField:{

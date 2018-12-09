@@ -6,16 +6,27 @@ import AllTodos from "./containers/AllTodos";
 
 class App extends Component {
     state={
-
+        allTodos:[],
     }
+
+    addNewTodo=(d)=>{
+        let prevTodos=[...this.state.allTodos]
+        prevTodos.push(d)
+        this.setState({allTodos:prevTodos})
+    }
+
     render() {
         return (
             <Fragment>
+
                 <Header/>
-                <AddTodoForm/>
-                <AllTodos/>
+
+                <AddTodoForm addNewTodo={this.addNewTodo}/>
+
+                <AllTodos allTodos={this.state.allTodos}/>
 
                 <Footer/>
+
             </Fragment>
         )
   }
