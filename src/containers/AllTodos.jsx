@@ -4,6 +4,7 @@ import TodoCards from '../components/TodoCards'
 //import _ from 'lodash'
 
 class AllTodos extends Component {
+
     // does not work here let todocards=.. wali line. why and localstorage problem fix .
 
     render() {
@@ -11,7 +12,7 @@ class AllTodos extends Component {
         let todoCards=this.props.allTodos.map(todo=>{
             return(
                 <Grid key={todo.id} item xs={11} md={4} s={8}>
-                    <TodoCards markUrgent={this.props.markUrgent} markDone={this.props.markDone} todo={todo}/>
+                    <TodoCards markUrgent={this.props.markUrgent} deleteTodo={this.props.deleteTodo} markDone={this.props.markDone} todo={todo}/>
                 </Grid>
             )
         })

@@ -6,6 +6,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import styles from '../themes/dark.css'
+import DeleteConfirmDialog from '../containers/DeleteConfirmDialog'
 
 let redAlert={
     backgroundColor:'red'
@@ -34,10 +35,11 @@ export default props => {
                     </Typography>
                 </CardContent>
             </CardActionArea>
+
             <CardActions>
-                <Button size="small" color="primary">
-                    DELETE
-                </Button>
+
+                {/*it has delete button + confirm dialog box in it**/}
+                <DeleteConfirmDialog deleteTodo={()=>props.deleteTodo(props.todo.id)}/>
 
                 {props.todo.done?
                     <Button size="small" onClick={()=>props.markDone(props.todo.id)} color="primary">

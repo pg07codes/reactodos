@@ -40,6 +40,12 @@ class App extends Component {
         this.setState({allTodos:prevTodos})
     }
 
+    deleteTodo=(id)=>{
+        let temp=[...this.state.allTodos]
+        temp=temp.filter(x=>x.id!==id)
+        this.setState({allTodos:temp})
+    }
+
     render() {
         return (
             <Fragment>
@@ -48,7 +54,7 @@ class App extends Component {
 
                 <AddTodoForm addNewTodo={this.addNewTodo} length={this.state.allTodos.length}/>
 
-                <AllTodos allTodos={this.state.allTodos} markUrgent={this.markUrgent} markDone={this.markDone}/>
+                <AllTodos allTodos={this.state.allTodos} deleteTodo={this.deleteTodo} markUrgent={this.markUrgent} markDone={this.markDone}/>
 
                 <Footer/>
 
