@@ -15,10 +15,10 @@ export default class FormDialog extends React.Component {
 
     state = {
         open: false,
-        title:'',
         todo:'',
         urgent:false,
-        done:false
+        done:false,
+        createdAt:''
 
     };
 
@@ -38,20 +38,18 @@ export default class FormDialog extends React.Component {
     };
 
     addTodo=()=>{
-        if(this.state.title===''){
+        if(this.state.todo===''){
             // to do something for user feedback
         }else{
             this.handleClose()
-            this.setState((state,props)=>{
-                return({id:props.length})
-            },()=>{
+            this.setState({id:Math.random(),createdAt:new Date()},()=>{
                 this.props.addNewTodo(this.state)
                 this.setState({
                     open: false,
-                    title:'',
                     todo:'',
                     urgent:false,
-                    done:false
+                    done:false,
+                    createdAt:''
                 })// to ensure that the state is reverted back to initial state after saving a todoItem.
             })
 
@@ -81,25 +79,17 @@ export default class FormDialog extends React.Component {
                         <DialogContentText>
                             Todos will be stored only for 24 hrs. Do not procrastinate !
                         </DialogContentText>
-                        <TextField
-                            style={styles.TextField}
-                            autoFocus
-                            margin="dense"
-                            id="title"
-                            label="Title"
-                            fullWidth
-                            type="text"
-                            onChange={this.onChangeHandler}
-                        />
+
                         <TextField
                             style={styles.TextField}
                             id="todo"
-                            placeholder='i have to...'
+                            label="enter task here"
+                            autoFocus
                             type="text"
                             fullWidth
                             onChange={this.onChangeHandler}
-
                         />
+
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={this.addTodo} color="primary">

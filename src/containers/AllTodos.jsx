@@ -12,7 +12,7 @@ class AllTodos extends Component {
         let todoCards=this.props.allTodos.map(todo=>{
             return(
                 <Grid key={todo.id} item xs={11} md={4} s={8}>
-                    <TodoCards markUrgent={this.props.markUrgent} deleteTodo={this.props.deleteTodo} markDone={this.props.markDone} todo={todo}/>
+                    <TodoCards editTodo={this.props.editTodo} markUrgent={this.props.markUrgent} deleteTodo={this.props.deleteTodo} markDone={this.props.markDone} todo={todo}/>
                 </Grid>
             )
         })

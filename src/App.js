@@ -21,6 +21,18 @@ class App extends Component {
         this.setState({allTodos:temp})
     }
 
+    editTodo=(id,todo)=>{
+        let temp=[...this.state.allTodos]
+        temp.forEach(x=> {
+            // mutate the urgent and set it...
+            if(x.id===id){
+                x.todo=todo
+                return 0
+            }
+        })
+        this.setState({allTodos:temp})
+    }
+
     markDone=(id)=>{
         let temp=[...this.state.allTodos]
         temp.forEach(x=> {
@@ -54,7 +66,7 @@ class App extends Component {
 
                 <AddTodoForm addNewTodo={this.addNewTodo} length={this.state.allTodos.length}/>
 
-                <AllTodos allTodos={this.state.allTodos} deleteTodo={this.deleteTodo} markUrgent={this.markUrgent} markDone={this.markDone}/>
+                <AllTodos editTodo={this.editTodo} allTodos={this.state.allTodos} deleteTodo={this.deleteTodo} markUrgent={this.markUrgent} markDone={this.markDone}/>
 
                 <Footer/>
 
