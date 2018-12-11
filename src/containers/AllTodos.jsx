@@ -1,7 +1,9 @@
-import React, {Component} from 'react'
+import React, {Component, Fragment} from 'react'
 import Grid from '@material-ui/core/Grid';
 import TodoCards from '../components/TodoCards'
+import styles from '../themes/dark.css'
 //import _ from 'lodash'
+
 
 class AllTodos extends Component {
 
@@ -18,15 +20,20 @@ class AllTodos extends Component {
         })
 
         return (
-            <Grid
-                container
-                direction="row"
-                justify="center"
-                alignItems="center"
-            >
-                {todoCards}
+            <Fragment>
+                <Grid
+                    container
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
+                >
+                    {todoCards}
 
-            </Grid>
+                </Grid>
+
+                <div style={styles.spacer}></div>
+            </Fragment>
+
         )
     }
 }

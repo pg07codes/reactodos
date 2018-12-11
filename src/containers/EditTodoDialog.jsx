@@ -7,6 +7,8 @@ import Button from "@material-ui/core/Button/Button";
 import styles from "../themes/dark.css";
 import TextField from "@material-ui/core/TextField/TextField";
 import DialogContentText from "@material-ui/core/DialogContentText/DialogContentText";
+import Create from "@material-ui/icons/Create";
+
 
 class EditTodoDialog extends Component {
     state = {
@@ -44,7 +46,7 @@ class EditTodoDialog extends Component {
         return (
             <Fragment>
                 <Button size="small" onClick={this.handleClickOpen} color="primary">
-                    EDIT
+                    <Create/>
                 </Button>
                 <Dialog
                     open={this.state.open}

@@ -5,6 +5,7 @@ import DialogContent from "@material-ui/core/DialogContent/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText/DialogContentText";
 import DialogActions from "@material-ui/core/DialogActions/DialogActions";
 import Button from "@material-ui/core/Button/Button";
+import Delete from "@material-ui/icons/Delete";
 
 class DeleteConfirmDialog extends Component {
     state = {
@@ -29,7 +30,7 @@ class DeleteConfirmDialog extends Component {
         return (
             <Fragment>
                 <Button size="small" onClick={this.handleClickOpen} color="primary">
-                    DELETE
+                    <Delete/>
                 </Button>
                 <Dialog
                     open={this.state.open}

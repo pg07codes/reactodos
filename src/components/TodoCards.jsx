@@ -8,12 +8,13 @@ import Typography from '@material-ui/core/Typography';
 import styles from '../themes/dark.css'
 import DeleteConfirmDialog from '../containers/DeleteConfirmDialog'
 import EditTodoDialog from '../containers/EditTodoDialog'
+import { CheckBox,CheckBoxOutlineBlank,Star,StarBorder} from '@material-ui/icons'
 
 let redAlert={
-    backgroundColor:'red'
+    backgroundColor:'#c3002f'
 }
 let greenAlert={
-    backgroundColor:'green'
+    backgroundColor:'#84bb2a'
 }
 
 
@@ -30,7 +31,7 @@ export default props => {
         <Card style={alert} raised>
             <CardActionArea>
                 <CardContent>
-                    <Typography gutterBottom variant="h4" component="h2">
+                    <Typography gutterBottom variant="h6" component="h2">
                         {props.todo.todo}
                     </Typography>
                     <Typography variant="caption" gutterBottom>
@@ -41,32 +42,37 @@ export default props => {
 
             <CardActions>
 
-                {/*it has delete button + confirm dialog box in it**/}
-                <DeleteConfirmDialog deleteTodo={()=>props.deleteTodo(props.todo.id)}/>
 
                 <EditTodoDialog editTodo={props.editTodo} id={props.todo.id}/>
 
                 {props.todo.done?
                     <Button size="small" onClick={()=>props.markDone(props.todo.id)} color="primary">
-                        UNDO
+                        <CheckBox/>
                     </Button> :
                     <Fragment>
-                        <Button size="small" onClick={()=>props.markDone(props.todo.id)} color="primary">
-                            DONE
-                        </Button>
 
                         {props.todo.urgent&&!props.todo.done?
                             <Button size="small" onClick={()=>props.markUrgent(props.todo.id)} color="primary">
-                                DELAY
+                                <Star/>
                             </Button>:
                             <Button size="small" onClick={()=>props.markUrgent(props.todo.id)} color="primary">
-                                MARK URGENT
+                                <StarBorder/>
                             </Button>
 
                         }
+
+                        <Button size="small" onClick={()=>props.markDone(props.todo.id)} color="primary">
+                            <CheckBoxOutlineBlank/>
+                        </Button>
+
                     </Fragment>
 
+
+
                 }
+
+                {/*it has delete button + confirm dialog box in it**/}
+                <DeleteConfirmDialog deleteTodo={()=>props.deleteTodo(props.todo.id)}/>
 
 
 

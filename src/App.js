@@ -48,7 +48,7 @@ class App extends Component {
 
     addNewTodo=(d)=>{
         let prevTodos=[...this.state.allTodos]
-        prevTodos.push(d)
+        prevTodos.unshift(d)//inserting it at top of list
         this.setState({allTodos:prevTodos})
     }
 
