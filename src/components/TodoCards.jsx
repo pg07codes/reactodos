@@ -8,10 +8,16 @@ import Typography from '@material-ui/core/Typography';
 import styles from '../themes/dark.css'
 import DeleteConfirmDialog from '../containers/DeleteConfirmDialog'
 import EditTodoDialog from '../containers/EditTodoDialog'
-import { CheckBox,CheckBoxOutlineBlank,Star,StarBorder} from '@material-ui/icons'
+import CheckBox from '@material-ui/icons/CheckBox'
+import CheckBoxOutlineBlank from '@material-ui/icons/CheckBoxOutlineBlank'
+import Star from '@material-ui/icons/Star'
+import StarBorder from '@material-ui/icons/StarBorder'
+import DoneAll from '@material-ui/icons/DoneAll'
+import NotificationImportant from '@material-ui/icons/NotificationImportant'
+
 
 let redAlert={
-    backgroundColor:'#c3002f'
+    backgroundColor:'#f50057'
 }
 let greenAlert={
     backgroundColor:'#84bb2a'
@@ -32,7 +38,7 @@ export default props => {
             <CardActionArea>
                 <CardContent>
                     <Typography gutterBottom variant="h6" component="h2">
-                        {props.todo.todo}
+                        {props.todo.done?<DoneAll/>:(props.todo.urgent?<NotificationImportant/>:null)}{props.todo.todo}
                     </Typography>
                     <Typography variant="caption" gutterBottom>
                         created at {''+props.todo.createdAt.getHours()+':'+props.todo.createdAt.getMinutes()} on {''+props.todo.createdAt.toDateString()}

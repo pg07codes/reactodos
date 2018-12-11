@@ -34,6 +34,9 @@ export default {
     spacer:{
         height:'70px',
         width:'100%',
+    },
+    Chip:{
+        margin:'15px'
     }
 
 

@@ -31,7 +31,7 @@ class AllTodos extends Component {
 
                 </Grid>
 
-                <div style={styles.spacer}></div>
+                <div style={styles.spacer}/>
             </Fragment>
 
         )
