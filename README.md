@@ -1,3 +1,24 @@
+# ReacTodos
+```
+- a complete progressive web app with offline working and localstorage support as datastore for  your todos.
+- Running out on phone storage, just use SAVE TO DESKTOP button in browser 
+  and it will work like a native app without consuming any space. BEST OF BOTH THE WORLDS..
+```
+
+## some changes i wanted to implement but couldn't due to..bla..bla..excuses
+
+- worked a bit on adding todos using voice control using annyang(it is a great library)
+- push notifications (as i am new to service-workers)
+
+
+## USES GOOGLE MATERIAL DESIGN TECHNIQUES AND  REACT.JS
+- IT USES MATERIAL UI FOR REACTJS AND THUS THE LOOK AND FEEL OF THE APP IS VERY FLAWLESS
+
+## LOOKS minimalistic and intuitive 
+
+![](todos.gif)
+ 
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
