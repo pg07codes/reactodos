@@ -11,10 +11,7 @@ export default {
         bottom:0,
     },
     BottomNavigationAction:{
-       color:'white'
-    },
-    Toolbar:{
-        margin:'auto'
+       color:'white',
     },
     Fab:{
         position:'fixed',

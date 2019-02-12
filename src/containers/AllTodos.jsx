@@ -2,30 +2,51 @@ import React, {Component, Fragment} from 'react'
 import Grid from '@material-ui/core/Grid';
 import TodoCards from '../components/TodoCards'
 import styles from '../themes/dark.css'
-//import _ from 'lodash'
+import Chip from '@material-ui/core/Chip'
 
 
 class AllTodos extends Component {
 
-    // does not work here let todocards=.. wali line. why and localstorage problem fix .
-
     render() {
 
-        let todoCards=this.props.allTodos.map(todo=>{
-            return(
-                <Grid key={todo.id} item xs={11} md={4} s={8}>
-                    <TodoCards editTodo={this.props.editTodo} markUrgent={this.props.markUrgent} deleteTodo={this.props.deleteTodo} markDone={this.props.markDone} todo={todo}/>
-                </Grid>
-            )
-        })
+        let todoCards=null
+        let alertChip=null
+
+        if(this.props.allTodos.length!==0){
+            todoCards=this.props.allTodos.map(todo=>{
+                return(
+                    <Grid key={todo.id} item xs={12} md={4} lg={3} s={11}>
+                        <TodoCards editTodo={this.props.editTodo} markUrgent={this.props.markUrgent} deleteTodo={this.props.deleteTodo} markDone={this.props.markDone} todo={todo}/>
+                    </Grid>
+                )
+            })
+        }
+        
+        else{
+            alertChip=(this.props.allTodos.length===0?
+                <Grid container
+                        alignContent='center'
+                        justify="center"
+                        alignItems="center"
+                >
+                    <Grid item >
+                    <Chip
+                        style={styles.Chip}
+                        label='No pending tasks available !! '
+                        color='secondary'/>
+                    </Grid>
+                </Grid>:null)
+        }
+        
 
         return (
             <Fragment>
+                
+                {alertChip}
+
                 <Grid
                     container
                     direction="row"
-                    justify="center"
-                    alignItems="center"
                 >
                     {todoCards}
 

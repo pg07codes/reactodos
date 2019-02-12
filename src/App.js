@@ -7,12 +7,14 @@ import Chip from '@material-ui/core/Chip'
 import styles from './themes/dark.css'
 import Grid from '@material-ui/core/Grid';
 
+
+
 class App extends Component {
 
     constructor(props){
         super(props)
 
-        function constructFromLocalStore(string){
+        function constructAllFromLocalStore(string){
             let allTodosWithoutConstructedDates=JSON.parse(string)
 
             allTodosWithoutConstructedDates.forEach(i=>i.createdAt=new Date(i.createdAt))// now dates constructed
@@ -20,10 +22,40 @@ class App extends Component {
             return allTodosWithoutConstructedDates // actually it should now be withConstructedDates..:)
 
         }
+        function constructDoneFromLocalStore(string){
+            let allTodosWithoutConstructedDates=JSON.parse(string)
+
+            allTodosWithoutConstructedDates.forEach(i=>i.createdAt=new Date(i.createdAt))
+
+            allTodosWithoutConstructedDates= allTodosWithoutConstructedDates.filter((i)=>{
+                return i.done === true
+            })
+
+            return allTodosWithoutConstructedDates 
+
+        }
+        function constructUrgentFromLocalStore(string){
+            let allTodosWithoutConstructedDates=JSON.parse(string)
+
+            allTodosWithoutConstructedDates.forEach(i=>i.createdAt=new Date(i.createdAt))
+
+            allTodosWithoutConstructedDates= allTodosWithoutConstructedDates.filter((i)=>{
+                return i.urgent === true
+            })
+
+            return allTodosWithoutConstructedDates 
+
+        }
+
 
         localStorage.allTodos===undefined?
-            this.state={allTodos:[]}:
-            this.state={allTodos:constructFromLocalStore(localStorage.allTodos)}
+            this.state={allTodos:[],doneTodos:[],leftTodos:[],trashedTodos:[]}:
+            this.state={
+                allTodos:constructAllFromLocalStore(localStorage.allTodos),
+                doneTodos:constructDoneFromLocalStore(localStorage.allTodos),
+                urgentTodos:constructUrgentFromLocalStore(localStorage.allTodos),
+                showing:'allTodos'
+            }
     }
 
     markUrgent=(id)=>{
@@ -32,35 +64,59 @@ class App extends Component {
             // mutate the urgent and set it...
             if(x.id===id){
                 x.urgent=!x.urgent
-                return 0
             }
         })
         this.setState({allTodos:temp},this.updateLocalStorage)
+
+        let urgentTodos=temp.filter((i)=>{ //adding to urgentTodos in state
+            return i.urgent===true
+        })
+        this.setState({urgentTodos:urgentTodos})
     }
 
     editTodo=(id,todo)=>{
         let temp=[...this.state.allTodos]
         temp.forEach(x=> {
-            // mutate the urgent and set it...
             if(x.id===id){
                 x.todo=todo
-                return 0
             }
         })
         this.setState({allTodos:temp},this.updateLocalStorage)
+
+        let doneTodos=temp.filter((i)=>{ //deleting from doneTodos in state - X1
+            return i.done===true
+        })
+
+        let urgentTodos=temp.filter((i)=>{ //deleting from urgentTodos in state - X2
+            return i.urgent===true
+        })
+
+        this.setState({// and now setting the state after - X1 - X2
+            urgentTodos:urgentTodos,
+            doneTodos:doneTodos
+        })
+
     }
 
     markDone=(id)=>{
         let temp=[...this.state.allTodos]
         temp.forEach(x=> {
-            // mutate the urgent and set it...
             if(x.id===id){
                 x.done=!x.done
                 x.urgent=false
-                return 0
             }
         })
         this.setState({allTodos:temp},this.updateLocalStorage)
+        
+        let doneTodos=temp.filter((i)=>{ //adding to doneTodos in state
+            return i.done===true
+        })
+        this.setState({doneTodos:doneTodos})
+
+        let urgentTodos=temp.filter((i)=>{ //removing the doneTodo from state->urgentTodo 
+            return i.urgent===true
+        })
+        this.setState({urgentTodos:urgentTodos})
     }
 
     updateLocalStorage=()=>{
@@ -78,6 +134,24 @@ class App extends Component {
         let temp=[...this.state.allTodos]
         temp=temp.filter(x=>x.id!==id)
         this.setState({allTodos:temp},this.updateLocalStorage)
+
+        let doneTodos=temp.filter((i)=>{ //deleting from doneTodos in state - X1
+            return i.done===true
+        })
+
+        let urgentTodos=temp.filter((i)=>{ //deleting from urgentTodos in state - X2
+            return i.urgent===true
+        })
+
+        this.setState({// and now setting the state after - X1 - X2
+            urgentTodos:urgentTodos,
+            doneTodos:doneTodos
+        })
+
+    }
+
+    setShowing=(status)=>{
+        this.setState({showing:status})
     }
 
     render() {
@@ -109,9 +183,17 @@ class App extends Component {
 
                 <AddTodoForm addNewTodo={this.addNewTodo} length={this.state.allTodos.length}/>
 
-                <AllTodos editTodo={this.editTodo} allTodos={this.state.allTodos} deleteTodo={this.deleteTodo} markUrgent={this.markUrgent} markDone={this.markDone}/>
+{/* show items depending on bottom menu selection */}
 
-                <Footer/>
+                {this.state.showing==='allTodos'?
+                <AllTodos editTodo={this.editTodo} allTodos={this.state.allTodos} deleteTodo={this.deleteTodo} markUrgent={this.markUrgent} markDone={this.markDone}/>:null}
+                {this.state.showing==='doneTodos'?
+                <AllTodos editTodo={this.editTodo} allTodos={this.state.doneTodos} deleteTodo={this.deleteTodo} markUrgent={this.markUrgent} markDone={this.markDone}/>:null}
+                {this.state.showing==='urgentTodos'?
+                <AllTodos editTodo={this.editTodo} allTodos={this.state.urgentTodos} deleteTodo={this.deleteTodo} markUrgent={this.markUrgent} markDone={this.markDone}/>:null}
+                           
+
+                <Footer setShowing={this.setShowing}/>
 
                 {/*<PushNotifier/>*/}
 

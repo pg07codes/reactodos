@@ -28,7 +28,7 @@ export default props => {
 
     let alert={...styles.Card,
         ...(props.todo.urgent?redAlert:null),
-        ...(props.todo.done?greenAlert:null)
+        ...(props.todo.done?greenAlert:null),
     }
 
 
