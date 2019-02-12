@@ -32,7 +32,7 @@ class AllTodos extends Component {
                     <Grid item >
                     <Chip
                         style={styles.Chip}
-                        label='No pending tasks available !! '
+                        label='Nothing to display !! '
                         color='secondary'/>
                     </Grid>
                 </Grid>:null)

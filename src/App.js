@@ -156,30 +156,11 @@ class App extends Component {
 
     render() {
 
-        let alertChip=(this.state.allTodos.length===0?
-            <Grid container
-                    alignContent='center'
-                    justify="center"
-                    alignItems="center"
-            >
-                <Grid item >
-                <Chip
-                    style={styles.Chip}
-                    label='No pending tasks available !! '
-                    color='secondary'/>
-                </Grid>
-            </Grid>:null)
-
-
-
 
         return (
             <Fragment>
 
                 <Header/>
-
-                {alertChip}
-
 
                 <AddTodoForm addNewTodo={this.addNewTodo} length={this.state.allTodos.length}/>
 
