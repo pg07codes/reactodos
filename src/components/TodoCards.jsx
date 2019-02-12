@@ -32,10 +32,9 @@ export default props => {
     }
 
 
-
     return (
         <Card style={alert} raised>
-            <CardActionArea>
+
                 <CardContent>
                     <Typography gutterBottom variant="h6" component="h2">
                         {props.todo.done?<DoneAll/>:(props.todo.urgent?<NotificationImportant/>:null)}{props.todo.todo}
@@ -44,18 +43,18 @@ export default props => {
                         created at {''+props.todo.createdAt.getHours()+':'+props.todo.createdAt.getMinutes()} on {''+props.todo.createdAt.toDateString()}
                     </Typography>
                 </CardContent>
-            </CardActionArea>
 
             <CardActions>
 
 
-                <EditTodoDialog editTodo={props.editTodo} id={props.todo.id}/>
 
                 {props.todo.done?
                     <Button size="small" onClick={()=>props.markDone(props.todo.id)} color="primary">
                         <CheckBox/>
                     </Button> :
                     <Fragment>
+
+                        <EditTodoDialog editTodo={props.editTodo} id={props.todo.id}/>
 
                         {props.todo.urgent&&!props.todo.done?
                             <Button size="small" onClick={()=>props.markUrgent(props.todo.id)} color="primary">

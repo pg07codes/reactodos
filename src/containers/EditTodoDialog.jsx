@@ -8,13 +8,31 @@ import styles from "../themes/dark.css";
 import TextField from "@material-ui/core/TextField/TextField";
 import DialogContentText from "@material-ui/core/DialogContentText/DialogContentText";
 import Create from "@material-ui/icons/Create";
-
+import _ from 'lodash'
 
 class EditTodoDialog extends Component {
-    state = {
-        open: false,
-        newTodo:''
-    };
+    constructor(props){
+        super(props);
+
+        function getTodoFromId(id){
+            let allTodosWithoutConstructedDates=JSON.parse(localStorage.allTodos)
+
+            allTodosWithoutConstructedDates.forEach(i=>i.createdAt=new Date(i.createdAt))
+            
+            let prevTodoFromId=_.find(allTodosWithoutConstructedDates,(item)=>{
+                return item.id===id
+            })
+
+            return (prevTodoFromId?prevTodoFromId.todo:"")
+        }
+
+        this.state={
+            open: false,
+            newTodo:getTodoFromId(this.props.id)
+        }
+
+    }
+
 
     onChangeHandler=(e)=>{
         this.setState({
@@ -42,7 +60,10 @@ class EditTodoDialog extends Component {
 
     }
 
+
     render() {
+
+        
         return (
             <Fragment>
                 <Button size="small" onClick={this.handleClickOpen} color="primary">
@@ -67,6 +88,7 @@ class EditTodoDialog extends Component {
                             fullWidth
                             type="text"
                             onChange={this.onChangeHandler}
+                            value={this.state.newTodo}
                         />
                     </DialogContent>
                     <DialogActions>
