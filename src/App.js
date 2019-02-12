@@ -3,9 +3,7 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import AddTodoForm from './containers/AddTodoForm'
 import AllTodos from "./containers/AllTodos";
-import Chip from '@material-ui/core/Chip'
-import styles from './themes/dark.css'
-import Grid from '@material-ui/core/Grid';
+
 
 
 
@@ -126,7 +124,10 @@ class App extends Component {
     addNewTodo=(d)=>{
         let prevTodos=[...this.state.allTodos]
         prevTodos.unshift(d)//inserting it at top of list
-        this.setState({allTodos:prevTodos},this.updateLocalStorage)
+        this.setState({
+            allTodos:prevTodos,
+            showing:'allTodos'
+        },this.updateLocalStorage)
 
     }
 

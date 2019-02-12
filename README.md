@@ -5,16 +5,18 @@
   and it will work like a native app without consuming any space. BEST OF BOTH THE WORLDS..
 ```
 
-## some changes i wanted to implement but couldn't due to..bla..bla..excuses
-
+### some changes i wanted to implement but couldn't due to..bla..bla..excuses
+```
 - worked a bit on adding todos using voice control using annyang(it is a great library)
 - push notifications (as i am new to service-workers)
+```
 
-
-## USES GOOGLE MATERIAL DESIGN TECHNIQUES AND  REACT.JS
+### USES GOOGLE MATERIAL DESIGN TECHNIQUES AND  REACT.JS
+```
 - IT USES MATERIAL UI FOR REACTJS AND THUS THE LOOK AND FEEL OF THE APP IS VERY FLAWLESS
+```
 
-## LOOKS minimalistic and intuitive 
+### LOOKS minimalistic and intuitive (new features added too)
 
 ![](todos.gif)
  
