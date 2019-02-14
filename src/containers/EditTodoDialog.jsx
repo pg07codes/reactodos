@@ -15,15 +15,20 @@ class EditTodoDialog extends Component {
         super(props);
 
         function getTodoFromId(id){
-            let allTodosWithoutConstructedDates=JSON.parse(localStorage.allTodos)
+            if(localStorage.allTodos!==undefined){
 
-            allTodosWithoutConstructedDates.forEach(i=>i.createdAt=new Date(i.createdAt))
+                let allTodosWithoutConstructedDates=JSON.parse(localStorage.allTodos)
+
+                allTodosWithoutConstructedDates.forEach(i=>i.createdAt=new Date(i.createdAt))
+                
+                let prevTodoFromId=_.find(allTodosWithoutConstructedDates,(item)=>{
+                    return item.id===id
+                })
+
+                return (prevTodoFromId?prevTodoFromId.todo:"")
+
+            }
             
-            let prevTodoFromId=_.find(allTodosWithoutConstructedDates,(item)=>{
-                return item.id===id
-            })
-
-            return (prevTodoFromId?prevTodoFromId.todo:"")
         }
 
         this.state={

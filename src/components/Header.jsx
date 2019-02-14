@@ -6,7 +6,6 @@ import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-
 import styles from '../themes/dark.css'
 
 const options = [
@@ -26,6 +25,16 @@ class Header extends React.Component{
       };
     
       handleClose = () => {
+        this.setState({ anchorEl: null });
+      };
+
+      handleActionAndClose = (e) => {
+
+        if(e.target.id==='Delete All'){
+            alert('All todos deleted. Reload to Clear.')
+            localStorage.removeItem('allTodos')
+        }
+        
         this.setState({ anchorEl: null });
       };
 
@@ -61,7 +70,7 @@ class Header extends React.Component{
                             }}
                             >
                             {options.map(option => (
-                                <MenuItem key={option} onClick={this.handleClose}>
+                                <MenuItem key={option} id={option} onClick={this.handleActionAndClose}>
                                 {option}
                                 </MenuItem>
                             ))}

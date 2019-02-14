@@ -20,6 +20,7 @@ class App extends Component {
             return allTodosWithoutConstructedDates // actually it should now be withConstructedDates..:)
 
         }
+
         function constructDoneFromLocalStore(string){
             let allTodosWithoutConstructedDates=JSON.parse(string)
 
@@ -47,7 +48,7 @@ class App extends Component {
 
 
         localStorage.allTodos===undefined?
-            this.state={allTodos:[],doneTodos:[],leftTodos:[],trashedTodos:[]}:
+            this.state={allTodos:[],doneTodos:[],urgentTodos:[],showing:'allTodos'}:
             this.state={
                 allTodos:constructAllFromLocalStore(localStorage.allTodos),
                 doneTodos:constructDoneFromLocalStore(localStorage.allTodos),
@@ -157,7 +158,6 @@ class App extends Component {
 
     render() {
 
-
         return (
             <Fragment>
 
@@ -165,7 +165,12 @@ class App extends Component {
 
                 <AddTodoForm addNewTodo={this.addNewTodo} length={this.state.allTodos.length}/>
 
-{/* show items depending on bottom menu selection */}
+
+
+                {/* show items depending on bottom menu selection --->NOTE THAT
+                AllTodos is a common component which renders the todos passed to it*/}
+
+                
 
                 {this.state.showing==='allTodos'?
                 <AllTodos editTodo={this.editTodo} allTodos={this.state.allTodos} deleteTodo={this.deleteTodo} markUrgent={this.markUrgent} markDone={this.markDone}/>:null}

@@ -4,7 +4,6 @@ import TodoCards from '../components/TodoCards'
 import styles from '../themes/dark.css'
 import Chip from '@material-ui/core/Chip'
 
-
 class AllTodos extends Component {
 
     render() {
@@ -23,25 +22,27 @@ class AllTodos extends Component {
         }
         
         else{
-            alertChip=(this.props.allTodos.length===0?
-                <Grid container
-                        alignContent='center'
-                        justify="center"
-                        alignItems="center"
-                >
-                    <Grid item >
-                    <Chip
-                        style={styles.Chip}
-                        label='Nothing to display !! '
-                        color='secondary'/>
-                    </Grid>
-                </Grid>:null)
-        }
-        
+
+            alertChip=
+            <Grid container
+                    alignContent='center'
+                    justify="center"
+                    alignItems="center"
+            >
+                <Grid item >
+                <Chip
+                    style={styles.Chip}
+                    label='Nothing to display !! '
+                    color='secondary'/>
+                </Grid>
+            </Grid>
+
+            }
+
 
         return (
             <Fragment>
-                
+
                 {alertChip}
 
                 <Grid
